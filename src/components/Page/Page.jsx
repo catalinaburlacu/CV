@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styles from './Page.module.css';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
@@ -6,6 +6,8 @@ import Main from '../Main/Main';
 
 export default function Page({ cvData }) {
   const [showSwipeCoach, setShowSwipeCoach] = useState(false);
+  const [showMobileContacts, setShowMobileContacts] = useState(false);
+  const swipeViewportRef = useRef(null);
 
   const {
     personal,
@@ -51,7 +53,6 @@ export default function Page({ cvData }) {
     const showTimer = window.setTimeout(() => {
       setShowSwipeCoach(true);
     }, 4000);
-
     const hideTimer = window.setTimeout(() => {
       setShowSwipeCoach(false);
     }, 7600);
@@ -62,10 +63,32 @@ export default function Page({ cvData }) {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = (e) => {
+      const { scrollTop, scrollHeight, clientHeight } = e.target;
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight - 50;
+      setShowMobileContacts(isAtBottom);
+    };
+
+    const viewport = swipeViewportRef.current;
+    if (!viewport) return;
+
+    const panels = viewport.querySelectorAll(`.${styles.swipePanel}`);
+    panels.forEach((panel) => {
+      panel.addEventListener('scroll', handleScroll);
+    });
+
+    return () => {
+      panels.forEach((panel) => {
+        panel.removeEventListener('scroll', handleScroll);
+      });
+    };
+  }, []);
+
   return (
     <div className={styles.page}>
       <Header personal={personal} />
-      <div className={styles.swipeViewport}>
+      <div className={styles.swipeViewport} ref={swipeViewportRef}>
         <section className={styles.swipePanel}>
           <Sidebar
             skills={skills}
@@ -85,9 +108,11 @@ export default function Page({ cvData }) {
           />
         </section>
       </div>
-      <div className={styles.mobileContactsWrapper}>
-        {mobileContacts}
-      </div>
+      {showMobileContacts && (
+        <div className={styles.mobileContactsWrapper}>
+          {mobileContacts}
+        </div>
+      )}
       <div
         className={`${styles.swipeCoachOverlay} ${showSwipeCoach ? styles.overlayVisible : ''}`}
         aria-hidden="true"
