@@ -1,18 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Page.module.css';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 import Main from '../Main/Main';
 
 export default function Page({ cvData }) {
-  const swipeViewportRef = useRef(null);
-  const sidebarPanelRef = useRef(null);
-  const swipeAnimTimeoutRef = useRef(null);
-  const hintHideTimeoutRef = useRef(null);
-  const [activePanel, setActivePanel] = useState(0);
-  const [swapDirection, setSwapDirection] = useState('');
-  const [showSwipeHint, setShowSwipeHint] = useState(false);
-  const [hintWasShown, setHintWasShown] = useState(false);
+  const [showSwipeCoach, setShowSwipeCoach] = useState(false);
 
   const {
     personal,
@@ -29,94 +22,30 @@ export default function Page({ cvData }) {
   } = cvData;
 
   useEffect(() => {
-    const viewport = swipeViewportRef.current;
-    if (!viewport) {
+    const isMobileOrTablet = window.matchMedia('(max-width: 960px)').matches;
+    if (!isMobileOrTablet) {
       return undefined;
     }
 
-    let previousIndex = 0;
-    let settleTimer = null;
+    const showTimer = window.setTimeout(() => {
+      setShowSwipeCoach(true);
+    }, 4000);
 
-    const handleHorizontalScroll = () => {
-      window.clearTimeout(settleTimer);
-      settleTimer = window.setTimeout(() => {
-        const panelWidth = viewport.clientWidth || 1;
-        const nextIndex = Math.round(viewport.scrollLeft / panelWidth);
-        if (nextIndex === previousIndex) {
-          return;
-        }
-
-        setSwapDirection(nextIndex > previousIndex ? 'swapLeft' : 'swapRight');
-        setActivePanel(nextIndex);
-        previousIndex = nextIndex;
-
-        window.clearTimeout(swipeAnimTimeoutRef.current);
-        swipeAnimTimeoutRef.current = window.setTimeout(() => {
-          setSwapDirection('');
-        }, 430);
-      }, 50);
-    };
-
-    viewport.addEventListener('scroll', handleHorizontalScroll, { passive: true });
+    const hideTimer = window.setTimeout(() => {
+      setShowSwipeCoach(false);
+    }, 7600);
 
     return () => {
-      viewport.removeEventListener('scroll', handleHorizontalScroll);
-      window.clearTimeout(settleTimer);
-      window.clearTimeout(swipeAnimTimeoutRef.current);
+      window.clearTimeout(showTimer);
+      window.clearTimeout(hideTimer);
     };
   }, []);
-
-  useEffect(() => {
-    const sidebarPanel = sidebarPanelRef.current;
-    if (!sidebarPanel) {
-      return undefined;
-    }
-
-    let previousScrollTop = 0;
-
-    const handleSidebarScroll = () => {
-      const currentScrollTop = sidebarPanel.scrollTop;
-      const isScrollingDown = currentScrollTop > previousScrollTop;
-
-      if (activePanel === 0 && isScrollingDown && currentScrollTop > 36 && !hintWasShown) {
-        setHintWasShown(true);
-        setShowSwipeHint(true);
-
-        window.clearTimeout(hintHideTimeoutRef.current);
-        hintHideTimeoutRef.current = window.setTimeout(() => {
-          setShowSwipeHint(false);
-        }, 3000);
-      }
-
-      previousScrollTop = currentScrollTop;
-    };
-
-    sidebarPanel.addEventListener('scroll', handleSidebarScroll, { passive: true });
-
-    return () => {
-      sidebarPanel.removeEventListener('scroll', handleSidebarScroll);
-      window.clearTimeout(hintHideTimeoutRef.current);
-    };
-  }, [activePanel, hintWasShown]);
-
-  const leftPanelClassName = [styles.swipePanel];
-  const rightPanelClassName = [styles.swipePanel];
-
-  if (swapDirection === 'swapLeft') {
-    leftPanelClassName.push(styles.swapOutLeft);
-    rightPanelClassName.push(styles.swapInFromRight);
-  }
-
-  if (swapDirection === 'swapRight') {
-    leftPanelClassName.push(styles.swapInFromLeft);
-    rightPanelClassName.push(styles.swapOutRight);
-  }
 
   return (
     <div className={styles.page}>
       <Header personal={personal} />
-      <div ref={swipeViewportRef} className={styles.swipeViewport}>
-        <section ref={sidebarPanelRef} className={leftPanelClassName.join(' ')}>
+      <div className={styles.swipeViewport}>
+        <section className={styles.swipePanel}>
           <Sidebar
             skills={skills}
             languages={languages}
@@ -124,7 +53,7 @@ export default function Page({ cvData }) {
             hobbies={hobbies}
           />
         </section>
-        <section className={rightPanelClassName.join(' ')}>
+        <section className={styles.swipePanel}>
           <Main
             summary={summary}
             education={education}
@@ -136,13 +65,16 @@ export default function Page({ cvData }) {
         </section>
       </div>
       <div
-        className={`${styles.promptBox} ${showSwipeHint ? styles.promptVisible : ''}`}
+        className={`${styles.swipeCoachOverlay} ${showSwipeCoach ? styles.overlayVisible : ''}`}
         aria-hidden="true"
       >
-        <div className={styles.tapperoo}></div>
-        <svg viewBox="0 0 512 512" className={styles.tapGesture} fill="#ffffff">
-          <path d="M416,149.333c-8.768,0-16.939,2.667-23.723,7.211C386.432,139.947,370.581,128,352,128 c-8.768,0-16.939,2.667-23.723,7.211c-5.845-16.597-21.696-28.544-40.277-28.544c-7.765,0-15.061,2.091-21.333,5.739V42.667 C266.667,19.136,247.531,0,224,0s-42.667,19.136-42.667,42.667v249.408l-58.645-29.333C113.856,258.325,103.957,256,94.08,256 c-22.485,0-40.747,18.283-40.747,40.875c0,10.901,4.245,21.12,11.947,28.821l137.941,137.941C234.389,494.827,275.883,512,320,512 c76.459,0,138.667-62.208,138.667-138.667V192C458.667,168.469,439.531,149.333,416,149.333z M437.333,373.333 c0,64.704-52.651,117.333-117.355,117.333c-38.421,0-74.517-14.955-101.653-42.133L80.363,310.592 c-3.669-3.648-5.696-8.533-5.696-13.845c0-10.709,8.704-19.413,19.413-19.413c6.592,0,13.163,1.557,19.072,4.501l74.091,37.035 c3.307,1.643,7.253,1.472,10.368-0.469c3.136-1.941,5.056-5.376,5.056-9.067V42.667c0-11.755,9.557-21.333,21.333-21.333 s21.333,9.579,21.333,21.333v202.667c0,5.888,4.779,10.667,10.667,10.667c5.888,0,10.667-4.779,10.667-10.667v-96 c0-11.755,9.557-21.333,21.333-21.333s21.333,9.579,21.333,21.333v96c0,5.888,4.779,10.667,10.667,10.667 s10.667-4.779,10.667-10.667v-74.667c0-11.755,9.557-21.333,21.333-21.333s21.333,9.579,21.333,21.333v74.667 c0,5.888,4.779,10.667,10.667,10.667c5.888,0,10.667-4.779,10.667-10.667V192c0-11.755,9.557-21.333,21.333-21.333 s21.333,9.579,21.333,21.333V373.333z" />
-        </svg>
+        <div className={styles.coachContent}>
+          <div className={styles.swipeGlow}></div>
+          <svg viewBox="0 0 512 512" className={styles.swipeHand} fill="#ffffff">
+            <path d="M416,149.333c-8.768,0-16.939,2.667-23.723,7.211C386.432,139.947,370.581,128,352,128 c-8.768,0-16.939,2.667-23.723,7.211c-5.845-16.597-21.696-28.544-40.277-28.544c-7.765,0-15.061,2.091-21.333,5.739V42.667 C266.667,19.136,247.531,0,224,0s-42.667,19.136-42.667,42.667v249.408l-58.645-29.333C113.856,258.325,103.957,256,94.08,256 c-22.485,0-40.747,18.283-40.747,40.875c0,10.901,4.245,21.12,11.947,28.821l137.941,137.941C234.389,494.827,275.883,512,320,512 c76.459,0,138.667-62.208,138.667-138.667V192C458.667,168.469,439.531,149.333,416,149.333z M437.333,373.333 c0,64.704-52.651,117.333-117.355,117.333c-38.421,0-74.517-14.955-101.653-42.133L80.363,310.592 c-3.669-3.648-5.696-8.533-5.696-13.845c0-10.709,8.704-19.413,19.413-19.413c6.592,0,13.163,1.557,19.072,4.501l74.091,37.035 c3.307,1.643,7.253,1.472,10.368-0.469c3.136-1.941,5.056-5.376,5.056-9.067V42.667c0-11.755,9.557-21.333,21.333-21.333 s21.333,9.579,21.333,21.333v202.667c0,5.888,4.779,10.667,10.667,10.667c5.888,0,10.667-4.779,10.667-10.667v-96 c0-11.755,9.557-21.333,21.333-21.333s21.333,9.579,21.333,21.333v96c0,5.888,4.779,10.667,10.667,10.667 s10.667-4.779,10.667-10.667v-74.667c0-11.755,9.557-21.333,21.333-21.333s21.333,9.579,21.333,21.333v74.667 c0,5.888,4.779,10.667,10.667,10.667c5.888,0,10.667-4.779,10.667-10.667V192c0-11.755,9.557-21.333,21.333-21.333 s21.333,9.579,21.333,21.333V373.333z" />
+          </svg>
+          <div className={styles.coachText}>Swipe stânga-dreapta</div>
+        </div>
       </div>
     </div>
   );

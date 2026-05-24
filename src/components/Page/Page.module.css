@@ -19,12 +19,13 @@
   min-width: 0;
 }
 
-.promptBox {
+.swipeCoachOverlay {
   display: none;
 }
 
-.promptVisible {
+.overlayVisible {
   opacity: 1;
+  visibility: visible;
 }
 
 @keyframes fadeUp {
@@ -79,55 +80,60 @@
     min-height: 100%;
   }
 
-  .swapOutLeft {
-    animation: swapOutLeft 0.42s ease both;
-  }
-
-  .swapInFromRight {
-    animation: swapInFromRight 0.42s ease both;
-  }
-
-  .swapInFromLeft {
-    animation: swapInFromLeft 0.42s ease both;
-  }
-
-  .swapOutRight {
-    animation: swapOutRight 0.42s ease both;
-  }
-
-  .promptBox {
-    display: block;
-    height: 100px;
-    width: 100px;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    top: 56%;
-    left: 52%;
+  .swipeCoachOverlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(18, 33, 28, 0.7);
     opacity: 0;
-    transition: opacity 300ms;
+    visibility: hidden;
+    transition: opacity 280ms ease, visibility 280ms ease;
     pointer-events: none;
-    z-index: 1000;
+    z-index: 2400;
   }
 
-  .tapperoo {
-    height: 48px;
-    width: 100px;
-    position: absolute;
-    top: -5px;
-    left: 50px;
-    border-radius: 100px;
-    background-color: #ffffff;
-    z-index: -1;
-    animation: tapperoo 3s infinite;
+  .coachContent {
+    position: relative;
+    width: min(260px, 75vw);
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 14px;
   }
 
-  .tapGesture {
+  .swipeGlow {
     position: absolute;
-    width: 84px;
-    height: 84px;
-    transform: rotate(30deg);
-    animation: handMove 3s infinite;
-    filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.16));
+    top: 50%;
+    left: 50%;
+    width: 170px;
+    height: 56px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.24);
+    transform: translate(-50%, -50%);
+    animation: swipeGlowPulse 1.6s ease-in-out infinite;
+  }
+
+  .swipeHand {
+    position: absolute;
+    top: 34%;
+    width: 88px;
+    height: 88px;
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.3));
+    animation: swipeHandMove 1.6s ease-in-out infinite;
+    transform-origin: center center;
+  }
+
+  .coachText {
+    margin-top: 120px;
+    color: #ffffff;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 }
 
@@ -141,89 +147,35 @@
   .page {
     border-radius: 0;
   }
-
-  .promptBox {
-    left: 54%;
-    top: 58%;
-  }
 }
 
-@keyframes tapperoo {
+@keyframes swipeGlowPulse {
   0% {
-    height: 25%;
-    width: 25%;
+    transform: translate(-50%, -50%) scaleX(0.55);
+    opacity: 0.45;
   }
 
   50% {
-    height: 5%;
-    width: 35%;
-    opacity: 0;
-    transform: translateX(-250%);
+    transform: translate(-50%, -50%) scaleX(1.04);
+    opacity: 0.92;
   }
 
   100% {
-    opacity: 0;
+    transform: translate(-50%, -50%) scaleX(0.55);
+    opacity: 0.45;
   }
 }
 
-@keyframes handMove {
+@keyframes swipeHandMove {
   0% {
-    transform: rotate(30deg);
+    transform: translateX(-36px) rotate(26deg);
   }
 
   50% {
-    transform: translate(-60%, -10%) rotate(-30deg) scale(0.9);
+    transform: translateX(36px) rotate(-12deg) scale(0.96);
   }
 
   100% {
-    transform: rotate(30deg);
-  }
-}
-
-@keyframes swapOutLeft {
-  0% {
-    transform: translateX(0) scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateX(-18px) scale(0.97);
-    opacity: 0.65;
-  }
-}
-
-@keyframes swapInFromRight {
-  0% {
-    transform: translateX(18px) scale(0.97);
-    opacity: 0.65;
-  }
-
-  100% {
-    transform: translateX(0) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes swapInFromLeft {
-  0% {
-    transform: translateX(-18px) scale(0.97);
-    opacity: 0.65;
-  }
-
-  100% {
-    transform: translateX(0) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes swapOutRight {
-  0% {
-    transform: translateX(0) scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateX(18px) scale(0.97);
-    opacity: 0.65;
+    transform: translateX(-36px) rotate(26deg);
   }
 }
