@@ -1,4 +1,4 @@
-export const cvData = {
+﻿export const cvData = {
   personal: {
     name: "Burlacu",
     surname: "Cătălina",
@@ -33,6 +33,7 @@ export const cvData = {
 
   skills: [
     { name: "C", level: 5 },
+    { name: "CSS", level: 5 },
     { name: "C++", level: 4 },
     { name: "C#", level: 5 },
     { name: "React", level: 5 },

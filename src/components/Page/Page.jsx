@@ -73,7 +73,6 @@ export default function Page({ cvData }) {
             qualities={qualities}
             hobbies={hobbies}
           />
-          {mobileContacts}
         </section>
         <section className={styles.swipePanel}>
           <Main
@@ -84,8 +83,10 @@ export default function Page({ cvData }) {
             experience={experience}
             activities={activities}
           />
-          {mobileContacts}
         </section>
+      </div>
+      <div className={styles.mobileContactsWrapper}>
+        {mobileContacts}
       </div>
       <div
         className={`${styles.swipeCoachOverlay} ${showSwipeCoach ? styles.overlayVisible : ''}`}
