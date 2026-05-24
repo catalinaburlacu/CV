@@ -61,9 +61,9 @@ export const cvData = {
   ],
 
   competencies: [
-    "Programare în limbajele C, C++, C# și React.js la nivel intermediar",
+    "Programare în limbajele C, C++, C# și React.js la nivel mediu",
     "Cunoștințe de bază în JavaScript și Python",
-    "Creare și publicare de moduri pentru jocuri pe platforma Nexus Mods",
+    "Deployment și hosting de aplicații web pe platforma Vercel (React + Vite projects)",
     "Familiarizare cu fluxuri de lucru de tip vibe-coding și prototipare rapidă",
     "Utilizarea sistemelor de versionare (Git / GitHub)",
   ],
