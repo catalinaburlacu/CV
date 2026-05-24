@@ -126,6 +126,5 @@
 @media (max-width: 640px) {
   .sidebar {
     border-right: none;
-    border-bottom: 2px solid var(--green-light);
   }
 }

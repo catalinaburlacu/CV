@@ -81,9 +81,10 @@
   fill: var(--green-light);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 960px) {
   .header {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   .header-left {

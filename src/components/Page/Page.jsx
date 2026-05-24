@@ -21,20 +21,26 @@ export default function Page({ cvData }) {
   return (
     <div className={styles.page}>
       <Header personal={personal} />
-      <Sidebar
-        skills={skills}
-        languages={languages}
-        qualities={qualities}
-        hobbies={hobbies}
-      />
-      <Main
-        summary={summary}
-        education={education}
-        competencies={competencies}
-        olympiads={olympiads}
-        experience={experience}
-        activities={activities}
-      />
+      <div className={styles.swipeViewport}>
+        <section className={styles.swipePanel}>
+          <Sidebar
+            skills={skills}
+            languages={languages}
+            qualities={qualities}
+            hobbies={hobbies}
+          />
+        </section>
+        <section className={styles.swipePanel}>
+          <Main
+            summary={summary}
+            education={education}
+            competencies={competencies}
+            olympiads={olympiads}
+            experience={experience}
+            activities={activities}
+          />
+        </section>
+      </div>
     </div>
   );
 }
