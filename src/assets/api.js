@@ -42,12 +42,23 @@ export const cvData = {
 
   languages: [
     { name: "Română", level: "Nativă", value: 100 },
-    { name: "Rusă", level: "C1", value: 85 },
     { name: "Engleză", level: "B1", value: 55 },
+    { name: "Rusă", level: "C1", value: 85 },
     { name: "Ucraineană", level: "A2", value: 25 },
   ],
 
-  qualities: ["Optimistă", "Sârguincioasă", "Atentă", "Politicoasă"],
+  qualities: [
+    "Optimistă",
+    "Sârguincioasă",
+    "Atentă",
+    "Politicoasă",
+    "Organizată",
+    "Adaptabilă",
+    "Empatică",
+    "Responsabilă",
+    "Curioasă",
+    "Rezistentă la stres",
+  ],
 
   hobbies: [
     "Muzică",
@@ -58,19 +69,36 @@ export const cvData = {
     "Vibe-coding",
     "Modding jocuri (Nexus)",
     "Ciclism",
+    "Badminton",
+    "Tenis",
+    "Dans",
   ],
 
   competencies: [
     "Programare în limbajele C, C++, C# și React.js la nivel mediu",
     "Cunoștințe de bază în JavaScript și Python",
+    "Adaptabilitate la situații de stres și capacitatea de a lucra eficient în echipă",
     "Deployment și hosting de aplicații web pe platforma Vercel (React + Vite projects) la nivel începător",
     "Familiarizare cu fluxuri de lucru de tip vibe-coding și prototipare rapidă",
     "Utilizarea sistemelor de versionare (Git / GitHub)",
   ],
 
+  olympiads: [
+    "Olimpiada la Matematică - nivel liceu (de 2 ori)",
+    "Olimpiada la Informatică - nivel liceu",
+    "Olimpiada la Informatică - nivel raion",
+    "Olimpiada la Chimie - nivel liceu",
+  ],
+
+  experience: [
+    "Monitor la examenele claselor a 9-a, anul de studii 2024-2025",
+    "Monitor la examenele claselor a 9-a, anul de studii 2025-2026",
+  ],
+
   activities: [
+    "Participare la Digital Democracy Forum",
     "Publicarea de conținut de tip mod pe platforma Nexus Mods pentru diverse titluri de jocuri",
-    "Lectură aprofundată în domenii tehnice și beletristică — dezvoltarea continuă a vocabularului și gândirii critice",
+    "Lectură aprofundată în domenii tehnice și beletristică - dezvoltarea continuă a vocabularului și gândirii critice",
     "Activitate de ciclism recreațional pentru menținerea unui stil de viață activ și echilibrat",
   ],
 };

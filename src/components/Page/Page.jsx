@@ -13,6 +13,8 @@ export default function Page({ cvData }) {
     qualities,
     hobbies,
     competencies,
+    olympiads,
+    experience,
     activities,
   } = cvData;
 
@@ -29,6 +31,8 @@ export default function Page({ cvData }) {
         summary={summary}
         education={education}
         competencies={competencies}
+        olympiads={olympiads}
+        experience={experience}
         activities={activities}
       />
     </div>

@@ -1,6 +1,13 @@
 import styles from './Main.module.css';
 
-export default function Main({ summary, education, competencies, activities }) {
+export default function Main({
+  summary,
+  education,
+  competencies,
+  olympiads,
+  experience,
+  activities,
+}) {
   return (
     <main className={styles.main}>
       {/* Profil profesional */}
@@ -21,9 +28,9 @@ export default function Main({ summary, education, competencies, activities }) {
         ))}
       </section>
 
-      {/* Competențe tehnice */}
+      {/* Competente */}
       <section className={styles.section}>
-        <div className={styles['section-title']}>Competențe tehnice</div>
+        <div className={styles['section-title']}>Competențe</div>
         <ul className={styles['bullet-list']}>
           {competencies.map((item, idx) => (
             <li key={idx}>{item}</li>
@@ -31,7 +38,27 @@ export default function Main({ summary, education, competencies, activities }) {
         </ul>
       </section>
 
-      {/* Activități & proiecte */}
+      {/* Olimpiade */}
+      <section className={styles.section}>
+        <div className={styles['section-title']}>Olimpiade</div>
+        <ul className={styles['bullet-list']}>
+          {olympiads.map((item, idx) => (
+            <li key={idx}>{item}</li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Experienta */}
+      <section className={styles.section}>
+        <div className={styles['section-title']}>Experiență</div>
+        <ul className={styles['bullet-list']}>
+          {experience.map((item, idx) => (
+            <li key={idx}>{item}</li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Activitati si proiecte */}
       <section className={styles.section}>
         <div className={styles['section-title']}>Activități & proiecte</div>
         <ul className={styles['bullet-list']}>
