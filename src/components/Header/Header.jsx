@@ -50,7 +50,7 @@ export default function Header({ personal }) {
             <div className={styles['contact-icon']}>
               <LocationIcon />
             </div>
-            {personal.location} &nbsp;·&nbsp; originară din {personal.origin}
+            {personal.location} &nbsp;·&nbsp; Originară din {personal.origin}
           </div>
 
           <div className={styles['contact-item']}>
