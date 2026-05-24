@@ -63,14 +63,13 @@ export const cvData = {
   competencies: [
     "Programare în limbajele C, C++, C# și React.js la nivel mediu",
     "Cunoștințe de bază în JavaScript și Python",
-    "Deployment și hosting de aplicații web pe platforma Vercel (React + Vite projects)",
+    "Deployment și hosting de aplicații web pe platforma Vercel (React + Vite projects) la nivel începător",
     "Familiarizare cu fluxuri de lucru de tip vibe-coding și prototipare rapidă",
     "Utilizarea sistemelor de versionare (Git / GitHub)",
   ],
 
   activities: [
     "Publicarea de conținut de tip mod pe platforma Nexus Mods pentru diverse titluri de jocuri",
-    "Participare la activități de vibe-coding: prototipare rapidă de aplicații web cu ajutorul inteligenței artificiale",
     "Lectură aprofundată în domenii tehnice și beletristică — dezvoltarea continuă a vocabularului și gândirii critice",
     "Activitate de ciclism recreațional pentru menținerea unui stil de viață activ și echilibrat",
   ],
