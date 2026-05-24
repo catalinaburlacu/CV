@@ -1,0 +1,61 @@
+:root {
+  --green-deep: #2d5a27;
+  --green-mid: #4a7c3f;
+  --green-soft: #7aab6e;
+  --green-light: #b8d4b2;
+  --green-pale: #daecd6;
+  --green-bg: #f0f7ee;
+  --violet-mid: #8b6aab;
+  --violet-soft: #b39dcc;
+  --violet-light: #d4c2e8;
+  --violet-pale: #ede6f5;
+  --white: #ffffff;
+  --text-dark: #1c2b1a;
+  --text-mid: #3d5438;
+  --text-light: #607858;
+  --sidebar-w: clamp(250px, 24vw, 320px);
+  --page-max-w: 1240px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--green-bg);
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 28px 20px 48px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+@media print {
+  body {
+    background: white;
+    padding: 0;
+  }
+}

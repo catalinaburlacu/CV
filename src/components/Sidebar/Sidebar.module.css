@@ -1,0 +1,131 @@
+.sidebar {
+  background: var(--green-pale);
+  padding: 28px 20px 36px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  border-right: 1px solid var(--green-light);
+}
+
+.section {
+}
+
+.section-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--green-deep);
+  margin-bottom: 10px;
+  padding-bottom: 4px;
+  border-bottom: 1.5px solid var(--green-soft);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.section-title::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--violet-mid);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Skills */
+.skill-item {
+  margin-bottom: 9px;
+}
+
+.skill-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.73rem;
+  color: var(--text-mid);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.skill-bar {
+  height: 5px;
+  background: var(--green-light);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--green-mid), var(--violet-soft));
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Languages */
+.lang-item {
+  margin-bottom: 9px;
+}
+
+.lang-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.73rem;
+  color: var(--text-mid);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.lang-level {
+  color: var(--violet-mid);
+  font-weight: 600;
+}
+
+/* Qualities */
+.qualities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.quality {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--violet-mid);
+  background: var(--violet-pale);
+  border: 1px solid var(--violet-light);
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+/* Hobbies */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--green-deep);
+  background: var(--green-pale);
+  border: 1px solid var(--green-light);
+  padding: 3px 10px;
+  border-radius: 12px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.chip:hover {
+  background: var(--violet-light);
+  color: var(--violet-mid);
+  border-color: var(--violet-soft);
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    border-right: none;
+    border-bottom: 2px solid var(--green-light);
+  }
+}

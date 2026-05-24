@@ -1,0 +1,93 @@
+.header {
+  grid-column: 1 / -1;
+  background: var(--green-deep);
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  align-items: center;
+  min-height: 130px;
+}
+
+.header-left {
+  padding: 28px 24px 28px 28px;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.05rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.name-surname {
+  display: block;
+  color: var(--green-light);
+}
+
+.name-divider {
+  width: 36px;
+  height: 2px;
+  background: var(--violet-soft);
+  margin: 10px 0 0;
+  border-radius: 2px;
+}
+
+.header-right {
+  padding: 24px 32px;
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--green-pale);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.contact-item a {
+  color: var(--green-pale);
+  transition: color 0.2s;
+}
+
+.contact-item a:hover {
+  color: var(--violet-light);
+}
+
+.contact-icon {
+  width: 18px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-icon svg {
+  width: 9px;
+  height: 9px;
+  fill: var(--green-light);
+}
+
+@media (max-width: 640px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+
+  .header-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+}
